@@ -17,7 +17,7 @@ function firstgutyblocks_hello_world_editor_assets() {
     wp_enqueue_script(
         'firstgutyblocks/hello-world',
         plugins_url( 'build/index.build.js', __FILE__ ),
-        array( 'wp-blocks', 'wp-element')
+        array( 'wp-blocks', 'wp-element' )
     );
 };
 
