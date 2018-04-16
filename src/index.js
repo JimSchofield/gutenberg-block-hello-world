@@ -17,7 +17,11 @@ registerBlockType('firstgutyblocks/hello-world', {
 
     edit(props) {
 
-        const { setAttributes, attributes } = props;
+        const { 
+            setAttributes, 
+            attributes,
+            className // The class name as a string!
+        } = props;
 
         function onTextChange(changes) {
             setAttributes({
@@ -26,21 +30,27 @@ registerBlockType('firstgutyblocks/hello-world', {
         }
 
         return (
-            <RichText
-                tagName="h2"
-                value={attributes.textString}
-                onChange={onTextChange}
-                placeholder="Enter your text here!"
-                />
+            // We've added a container div
+            // and we're placing our styles on that manually
+            <div className={className}>
+                <RichText
+                    tagName="h2"
+                    value={attributes.textString}
+                    onChange={onTextChange}
+                    placeholder="Enter your text here!"
+                    />
+            </div>
         );
     },
 
     save(props) {
 
-        const { attributes } = props;
+        const { attributes, className } = props;
 
         return (
-            <h2>{attributes.textString}</h2>
+            <div className={className}>
+                <h2>{attributes.textString}</h2>
+            </div>
         );
     }
 })

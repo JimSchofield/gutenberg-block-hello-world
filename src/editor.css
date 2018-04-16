@@ -1,0 +1,12 @@
+.wp-block-firstgutyblocks-hello-world {
+    position: relative;
+}
+
+.wp-block-firstgutyblocks-hello-world:before {
+    position: absolute;
+    top: 0;
+    right: 1em;
+    content: 'Editor mode!';
+    color: navy;
+    font-weight: bolder;
+}
