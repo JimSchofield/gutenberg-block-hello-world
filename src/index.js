@@ -14,18 +14,12 @@ registerBlockType('firstgutyblocks/hello-world', {
         }
     },
 
-    // props are passed to edit by default
-    // props contains things like setAttributes and attributes
+
     edit(props) {
 
-        // we are peeling off the things we need
         const { setAttributes, attributes } = props;
 
-        // This function is called when RichText changes
-        // By default the new string is passed to the function
-        // not an event object like react normally would do
         function onTextChange(changes) {
-            // works very much like setState
             setAttributes({
                 textString: changes
             });
@@ -41,14 +35,10 @@ registerBlockType('firstgutyblocks/hello-world', {
         );
     },
 
-    // again, props are automatically passed to save and edit
     save(props) {
 
         const { attributes } = props;
 
-        // We want the text to be an h2 element
-        // and we place the textString value just
-        // like we would in a normal react app
         return (
             <h2>{attributes.textString}</h2>
         );
