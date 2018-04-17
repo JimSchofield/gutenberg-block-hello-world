@@ -10,7 +10,9 @@ registerBlockType('firstgutyblocks/hello-world', {
 
     attributes: {
         textString: {
-            type: 'string'
+            type: 'array',
+            source: 'children',
+            selector: 'h2',
         }
     },
 
