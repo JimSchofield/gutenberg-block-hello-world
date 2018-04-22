@@ -13,26 +13,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function firstgutyblocks_hello_world_editor_assets() {
+function firstgutyblocks_hero_image_editor_assets() {
     wp_enqueue_script(
-        'firstgutyblocks/hello-world',
+        'firstgutyblocks/hero-image',
         plugins_url( 'build/index.build.js', __FILE__ ),
         array( 'wp-blocks', 'wp-element' )
     );
     wp_enqueue_style(
-		'firstgutyblocks/hello-world-editor-style',
+		'firstgutyblocks/hero-image-editor-style',
         plugins_url( 'src/editor.css', __FILE__ ),
         array( 'wp-edit-blocks' )
 	);
 };
 
-add_action( 'enqueue_block_editor_assets', 'firstgutyblocks_hello_world_editor_assets');
+add_action( 'enqueue_block_editor_assets', 'firstgutyblocks_hero_image_editor_assets');
 
-function firstgutyblocks_hello_world_assets() {
+function firstgutyblocks_hero_image_assets() {
     wp_enqueue_style(
-		'firstgutyblocks/hello-world',
+		'firstgutyblocks/hero-image',
         plugins_url( 'src/view.css', __FILE__ ),
         array( 'wp-blocks' )
 	);
 }
-add_action( 'enqueue_block_assets', 'firstgutyblocks_hello_world_assets');
+add_action( 'enqueue_block_assets', 'firstgutyblocks_hero_image_assets');
