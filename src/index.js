@@ -1,8 +1,9 @@
-const { 
+const {
     registerBlockType,
     RichText,
     InspectorControls,
-    ColorPalette
+    ColorPalette,
+    MediaUpload
 } = wp.blocks;
 
 registerBlockType('firstgutyblocks/hero-image', {
@@ -18,20 +19,24 @@ registerBlockType('firstgutyblocks/hero-image', {
         },
         fontColor: {
             type: 'string',
-            default: 'black'
+            default: null // let's get rid of the annoying orange
+        },
+        backgroundImage: {
+            type: 'string',
+            default: null, // no image by default!
         }
     },
 
 
     edit(props) {
 
-        const { 
-            setAttributes, 
+        const {
+            setAttributes,
             attributes,
             className,
             focus
         } = props;
-        const { fontColor } = props.attributes;
+        const { fontColor, overlayColor, backgroundImage } = props.attributes;
 
         function onTextChange(changes) {
             setAttributes({
@@ -45,6 +50,18 @@ registerBlockType('firstgutyblocks/hero-image', {
             })
         }
 
+        function onOverlayColorChange(changes) {
+            setAttributes({
+                overlayColor: changes
+            })
+        }
+
+        function onImageSelect(imageObject) {
+            setAttributes({
+                backgroundImage: imageObject.sizes.full.url
+            })
+        }
+
         return ([
             focus && <InspectorControls>
                 <div>
@@ -52,25 +69,48 @@ registerBlockType('firstgutyblocks/hero-image', {
                     <ColorPalette
                         value={fontColor}
                         onChange={onTextColorChange}
-                        />
+                    />
+                </div>
+                <div>
+                    <strong>Select an overlay color:</strong>
+                    <ColorPalette
+                        value={overlayColor}
+                        onChange={onOverlayColorChange}
+                    />
+                </div>
+                <div>
+                    <strong>Select a background image:</strong>
+                    <MediaUpload
+                        onSelect={onImageSelect}
+                        type="image"
+                        value={backgroundImage}
+                        render={({ open }) => (
+                            <button onClick={open}>
+                                Upload Image!
+                            </button>
+                        )}
+                    />
                 </div>
             </InspectorControls>,
-            <div 
+            <div
                 className={className}
                 style={{
-                    backgroundImage: `url('http://placehold.it/1440x700')`,
+                    backgroundImage: `url(${backgroundImage})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'
                 }}>
-                <div className="overlay"></div> {/* Adding an overlay element */}
+                <div
+                    className="overlay"
+                    style={{ background: overlayColor }}
+                ></div>
                 <RichText
                     tagName="h2"
-                    className="content" // adding a class we can target
+                    className="content"
                     value={attributes.textString}
                     onChange={onTextChange}
                     placeholder="Enter your text here!"
-                    style={{color: fontColor}}
-                    />
+                    style={{ color: fontColor }}
+                />
             </div>
         ]);
     },
@@ -81,7 +121,7 @@ registerBlockType('firstgutyblocks/hero-image', {
         const { fontColor } = props.attributes;
 
         return (
-            <div 
+            <div
                 className={className}
                 style={{
                     backgroundImage: `url('http://placehold.it/1440x700')`,
