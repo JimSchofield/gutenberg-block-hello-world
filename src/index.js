@@ -46,7 +46,7 @@ registerBlockType('firstgutyblocks/hero-image', {
         }
 
         return ([
-            focus && <InspectorControls>
+            <InspectorControls>
                 <div>
                     <strong>Select a font color:</strong>
                     <ColorPalette
