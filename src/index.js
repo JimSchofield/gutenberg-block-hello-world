@@ -33,8 +33,7 @@ registerBlockType('firstgutyblocks/hero-image', {
         const {
             setAttributes,
             attributes,
-            className,
-            focus
+            className
         } = props;
         const { fontColor, overlayColor, backgroundImage } = props.attributes;
 
@@ -63,7 +62,7 @@ registerBlockType('firstgutyblocks/hero-image', {
         }
 
         return ([
-            focus && <InspectorControls>
+            <InspectorControls>
                 <div>
                     <strong>Select a font color:</strong>
                     <ColorPalette
@@ -118,13 +117,13 @@ registerBlockType('firstgutyblocks/hero-image', {
     save(props) {
 
         const { attributes, className } = props;
-        const { fontColor } = props.attributes;
+        const { fontColor, backgroundImage } = props.attributes;
 
         return (
             <div
                 className={className}
                 style={{
-                    backgroundImage: `url('http://placehold.it/1440x700')`,
+                    backgroundImage: `url(${backgroundImage})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'
                 }}>
